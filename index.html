@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent O Friend</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6c2cff, #a23cff);
+      color: white;
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 45px 20px 30px;
+      background: white;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 22px;
+    }
+
+    button {
+      border: none;
+      padding: 13px 22px;
+      margin: 5px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #6c2cff;
+      color: white;
+    }
+
+    .section {
+      padding: 30px 18px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #6c2cff;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .safety {
+      background: #fff3cd;
+      border-radius: 16px;
+      padding: 22px;
+      line-height: 1.7;
+    }
+
+    .safety h3 {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #171717;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 7px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🤝 Rent O Friend</h1>
+  <p>Find a friendly companion for your time</p>
+</header>
+
+<section class="hero">
+  <h2>Need a Friend?</h2>
+  <p>
+    Meet people, spend time together and enjoy friendly companionship
+    in a safe and respectful environment.
+  </p>
+
+  <div class="buttons">
+    <button onclick="showMessage()">Find a Friend</button>
+    <button onclick="showMessage()">Become a Friend</button>
+  </div>
+
+  <p id="message" class="hidden" style="margin-top:15px;color:#6c2cff;">
+    Registration feature coming soon!
+  </p>
+</section>
+
+<section class="section">
+  <h2>How It Works</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>👤 Choose</h3>
+      <p>Find a friend according to your interests and preferences.</p>
+    </div>
+
+    <div class="card">
+      <h3>📅 Connect</h3>
+      <p>Choose a suitable time and place to meet in a public location.</p>
+    </div>
+
+    <div class="card">
+      <h3>😊 Enjoy</h3>
+      <p>Spend quality time together with respect and clear boundaries.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>🛡️ Safety First</h2>
+
+  <div class="safety">
+    <h3>Important Safety Rules</h3>
+
+    <p>• Always meet in a public and crowded place.</p>
+    <p>• Do not go to isolated or deserted locations.</p>
+    <p>• Tell a trusted person where you are going.</p>
+    <p>• Respect personal boundaries at all times.</p>
+    <p>• Sexual activity is not allowed through this service.</p>
+    <p>• Any inappropriate behaviour may result in removal from the platform.</p>
+    <p>• If you feel unsafe, leave the meeting immediately and contact someone you trust.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>About Rent O Friend</h2>
+
+  <div class="card">
+    <p>
+      Rent O Friend is designed to help people find friendly companionship
+      for conversations, outings, activities and social time.
+      Safety, consent, respect and public meetings are our priorities.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Rent O Friend</p>
+  <p>Safe • Respectful • Friendly</p>
+</footer>
+
+<script>
+  function showMessage() {
+    document.getElementById("message").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
