@@ -1,0 +1,117 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent O Friend — Real Connections</title>
+<meta name="description" content="Rent O Friend — Real People, Real Moments, No Judgement.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#ff1685;--pink2:#ff4ca5;--navy:#071525;--text:#10233d;--soft:#f4f8fc}
+body{font-family:Inter,Arial,sans-serif;color:var(--text);background:var(--soft);line-height:1.5}
+a{text-decoration:none;color:inherit}button{font:inherit;cursor:pointer;border:0}
+.nav{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:20;box-shadow:0 2px 18px #07152518}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:25px}.logoMark{width:43px;height:43px;border-radius:50% 50% 50% 8px;background:linear-gradient(135deg,#633cff,#ff1685);display:grid;place-items:center;color:#fff;font-size:24px;transform:rotate(-8deg)}
+.logo span{color:var(--pink)}.tag{display:block;font-size:10px;color:#718096;font-weight:600;letter-spacing:.3px}
+.navlinks{display:flex;gap:32px;font-size:14px;font-weight:700}.navlinks a:hover{color:var(--pink)}
+.navbtns{display:flex;gap:12px}.outline,.primary{padding:12px 22px;border-radius:10px;font-weight:800}.outline{background:#fff;border:1px solid #b7c3d2}.primary{background:var(--pink);color:#fff;box-shadow:0 8px 20px #ff16854a}
+.hero{min-height:530px;position:relative;display:flex;align-items:center;overflow:hidden;background:linear-gradient(90deg,#06101de8 0%,#06101da8 42%,#06101d18 75%),url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1800&q=85') center/cover}
+.heroInner{width:92%;max-width:1220px;margin:auto;color:#fff;padding:70px 0;position:relative}.eyebrow{color:#ffd46b;font-weight:900;font-size:18px;margin-bottom:5px}.hero h1{font-size:clamp(48px,6vw,82px);line-height:.98;letter-spacing:-3px}.hero h1 b{color:var(--pink)}.hero h2{font-size:clamp(22px,3vw,35px);margin:16px 0 10px}.hero p{max-width:570px;font-size:18px;color:#eef4fb}
+.actions{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}.actions button{padding:15px 25px;border-radius:12px;font-weight:900}.find{background:var(--pink);color:#fff}.watch{background:#ffffff10;color:#fff;border:1px solid #fff}
+.trust{display:flex;gap:24px;margin-top:26px;font-size:13px;font-weight:700}.trust span{display:flex;gap:7px;align-items:center}
+.offer{position:absolute;right:3%;bottom:45px;display:flex;align-items:center;gap:0;transform:rotate(-2deg)}.fee{background:linear-gradient(135deg,#ff1988,#ff54ac);color:#fff;padding:15px 28px;border-radius:8px 0 0 8px;font-weight:900}.fee small{display:block;font-size:14px}.fee strong{font-size:47px;line-height:1}.guarantee{background:#101d2c;color:#fff;border:3px solid #ffd05a;padding:13px 18px;border-radius:0 15px 15px 0;font-weight:900}.guarantee strong{display:block;color:#ffd05a;font-size:20px}.guarantee small{font-size:12px}
+.features{background:#fff;display:grid;grid-template-columns:repeat(4,1fr);padding:38px 5%;gap:10px}.feature{text-align:center;padding:10px 24px;border-right:1px solid #dce5ee}.feature:last-child{border:0}.icon{font-size:34px}.feature h3{margin:7px 0}.feature p{font-size:14px;color:#5d6d82}
+.section{max-width:1220px;margin:auto;padding:50px 3%}.dark{max-width:none;background:var(--navy);color:#fff}.darkInner{max-width:1220px;margin:auto}.sectionTitle{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.sectionTitle h2{font-size:31px}.sectionTitle p{color:#718096}.pinkline{width:45px;height:4px;background:var(--pink);border-radius:5px;margin-bottom:8px}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.card{background:#fff;border-radius:13px;overflow:hidden;color:var(--text);box-shadow:0 8px 25px #07152512}.cardImg{height:145px;background-size:cover;background-position:center}.card:nth-child(1) .cardImg{background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80')}.card:nth-child(2) .cardImg{background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80')}.card:nth-child(3) .cardImg{background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80')}.card:nth-child(4) .cardImg{background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80')}.card:nth-child(5) .cardImg{background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80')}.card:nth-child(6) .cardImg{background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')}.cardBody{padding:13px}.cardBody h3{font-size:16px}.cardBody p{font-size:12px;color:#64748b;margin-top:4px}
+.how{display:grid;grid-template-columns:1fr 1.25fr;gap:28px;align-items:center;background:linear-gradient(135deg,#101f30,#07111e);border:1px solid #415064;border-radius:16px;padding:20px}.video{height:270px;border-radius:12px;background:linear-gradient(90deg,#0006,#0000),url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=85') center/cover;display:grid;place-items:center}.play{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--pink);font-size:28px;display:grid;place-items:center}
+.steps{display:grid;gap:18px;margin-top:20px}.step{display:flex;gap:15px;align-items:center}.stepIcon{width:48px;height:48px;border-radius:14px;background:#ffffff18;display:grid;place-items:center;font-size:22px}.step b{display:block}.step span{font-size:13px;color:#bdc8d6}
+.testimonials{background:#fff}.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.quote{padding:24px;border-radius:15px;background:#fff;box-shadow:0 5px 24px #07152512}.person{display:flex;gap:12px;align-items:center;margin-bottom:14px}.avatar{width:50px;height:50px;border-radius:50%;background-size:cover;background-position:center}.quote p{font-size:14px;color:#52647a}.stars{color:#ffad00;margin-top:4px}
+.cta{background:linear-gradient(135deg,#ff1685,#7b36ff);color:#fff;text-align:center;padding:52px 20px}.cta h2{font-size:35px}.cta p{margin:8px auto 22px;max-width:650px}.cta button{background:#fff;color:var(--pink);padding:15px 28px;border-radius:11px;font-weight:900}
+footer{background:#071525;color:#d9e2ec;padding:45px 5% 20px}.footerGrid{max-width:1220px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:35px}.footerGrid h4{color:#fff;margin-bottom:12px}.footerGrid a{display:block;font-size:13px;margin:7px 0;color:#aebccc}.footerGrid a:hover{color:#fff}.copyright{max-width:1220px;margin:30px auto 0;padding-top:18px;border-top:1px solid #243447;font-size:12px;color:#8493a5;display:flex;justify-content:space-between}
+@media(max-width:900px){.navlinks{display:none}.offer{position:static;margin-top:30px;transform:none}.heroInner{padding:55px 0}.features{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(3,1fr)}.how{grid-template-columns:1fr}.quotes{grid-template-columns:1fr}.footerGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.nav{padding:0 4%;height:65px}.logo{font-size:20px}.logoMark{width:36px;height:36px}.navbtns .outline{display:none}.hero h1{font-size:49px}.hero h2{font-size:23px}.trust{flex-wrap:wrap}.offer{display:block}.fee,.guarantee{border-radius:10px;margin-top:5px}.features{grid-template-columns:1fr 1fr;padding:25px 2%}.feature{padding:8px 10px}.cards{grid-template-columns:repeat(2,1fr)}.cardImg{height:125px}.copyright{display:block}.copyright span{display:block;margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#"><div class="logoMark">♥</div><div>Rent <span>O</span> Friend<div class="tag">Real People • Real Moments • No Judgement</div></div></a>
+  <nav class="navlinks"><a href="#">Home</a><a href="#friends">Find Friends</a><a href="#how">How It Works</a><a href="#safety">Safety</a><a href="#about">About Us</a></nav>
+  <div class="navbtns"><button class="outline" onclick="login()">♙ Login</button><button class="primary" onclick="register()">♙ Sign Up</button></div>
+</header>
+
+<section class="hero">
+  <div class="heroInner">
+    <div class="eyebrow">Need a friend? Rent one.</div>
+    <h1>Rent <b>O</b> Friend</h1>
+    <h2>Because Everyone Needs a Friend...</h2>
+    <p>Whether you need company, support, or just someone to spend time with — Rent O Friend is here for you.</p>
+    <div class="actions"><button class="find" onclick="register()">⌕ &nbsp; Find a Friend</button><button class="watch" onclick="watchVideo()">▶ &nbsp; Watch Video</button></div>
+    <div class="trust"><span>♢ Verified Profiles</span><span>♙ Safe & Secure</span><span>♡ Real People</span></div>
+    <div class="offer"><div class="fee"><small>Registration Fee</small><strong>₹499</strong></div><div class="guarantee">🛡️ <strong>10 Days</strong>No Meetup? <small>Money Back Guarantee*</small></div></div>
+  </div>
+</section>
+
+<section class="features" id="safety">
+  <div class="feature"><div class="icon">🛡️</div><h3>Safe & Secure</h3><p>Your safety is our priority. Verified profiles & secure payments.</p></div>
+  <div class="feature"><div class="icon">👥</div><h3>Verified Friends</h3><p>Real people. Real profiles. No fake accounts.</p></div>
+  <div class="feature"><div class="icon">⭐</div><h3>Flexible Plans</h3><p>Choose hourly, daily or custom plans as per your need.</p></div>
+  <div class="feature"><div class="icon">♥</div><h3>No Judgement</h3><p>Be yourself. We respect your choice and privacy.</p></div>
+</section>
+
+<section class="section dark" id="friends"><div class="darkInner">
+  <div class="sectionTitle"><div><div class="pinkline"></div><h2>Popular Friend Categories</h2><p>Find the right kind of friend for your moments.</p></div><a href="#" style="color:#ff4ca5;font-weight:800">View All →</a></div>
+  <div class="cards">
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>College Friend</h3><p>For classes, projects, college life & more.</p></div></div>
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>Gym Partner</h3><p>Stay motivated, workout together.</p></div></div>
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>Travel Buddy</h3><p>Explore new places, create memories.</p></div></div>
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>Cafe Partner</h3><p>Chill, talk, enjoy good vibes.</p></div></div>
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>Event Companion</h3><p>Concerts, parties, functions & more.</p></div></div>
+    <div class="card"><div class="cardImg"></div><div class="cardBody"><h3>Special Friend</h3><p>For deeper connections (terms apply).</p></div></div>
+  </div>
+  <div class="how" id="how" style="margin-top:25px">
+    <div class="video"><button class="play" onclick="watchVideo()">▶</button></div>
+    <div><div class="pinkline"></div><h2 style="font-size:32px">See How It Works</h2><p style="color:#c6d1dd;margin-top:7px">Choose a profile, send a request, confirm your plan and connect safely.</p>
+      <div class="steps">
+        <div class="step"><div class="stepIcon">👥</div><div><b>1. Choose Your Friend</b><span>Browse profiles and pick who matches your vibe.</span></div></div>
+        <div class="step"><div class="stepIcon">📅</div><div><b>2. Book & Connect</b><span>Confirm your plan and get in touch.</span></div></div>
+        <div class="step"><div class="stepIcon">☺</div><div><b>3. Enjoy Your Time</b><span>Make memories, not just plans.</span></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section testimonials" id="about">
+  <div class="sectionTitle"><div><div class="pinkline"></div><h2>Real Stories, Real Connections</h2><p>What people say about their experience.</p></div></div>
+  <div class="quotes">
+    <div class="quote"><div class="person"><div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80')"></div><div><b>Priya S.</b><small style="display:block;color:#718096">College Student</small><div class="stars">★★★★★</div></div></div><p>“I found an amazing friend here for my college projects. It's safe, easy and super helpful!”</p></div>
+    <div class="quote"><div class="person"><div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80')"></div><div><b>Rohit K.</b><small style="display:block;color:#718096">Fitness Enthusiast</small><div class="stars">★★★★★</div></div></div><p>“My gym partner from here is now a real friend. Great experience!”</p></div>
+    <div class="quote"><div class="person"><div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=80')"></div><div><b>Ananya M.</b><small style="display:block;color:#718096">Traveller</small><div class="stars">★★★★★</div></div></div><p>“I met my travel buddy and we had the best trip ever. Highly recommended!”</p></div>
+  </div>
+</section>
+
+<section class="cta"><h2>Ready to Meet Your Next Friend?</h2><p>Join Rent O Friend today. Registration is ₹499 with our 10-day money-back guarantee, subject to the published terms.</p><button onclick="register()">Get Started — ₹499</button></section>
+
+<footer>
+  <div class="footerGrid">
+    <div><div class="logo" style="color:#fff"><div class="logoMark">♥</div><div>Rent <span>O</span> Friend<div class="tag" style="color:#8797aa">Real People • Real Moments • No Judgement</div></div></div></div>
+    <div><h4>Quick Links</h4><a href="#">Home</a><a href="#friends">Find Friends</a><a href="#how">How It Works</a><a href="#safety">Safety</a></div>
+    <div><h4>Support</h4><a href="#">Help & FAQ</a><a href="#">Contact Us</a><a href="#">Terms & Conditions</a><a href="#">Privacy Policy</a></div>
+    <div><h4>Stay Connected</h4><p style="font-size:13px;color:#9eacbb">Get updates & latest offers</p><div style="display:flex;margin-top:12px"><input placeholder="Enter your email" style="padding:12px;border-radius:8px 0 0 8px;border:1px solid #526274;background:#102033;color:#fff;min-width:0"><button class="primary" style="border-radius:0 8px 8px 0;padding:12px" onclick="subscribe()">Subscribe</button></div></div>
+  </div>
+  <div class="copyright"><span>© 2026 Rent O Friend. All rights reserved.</span><span>Real People. Real Moments. No Judgement. ♥</span></div>
+</footer>
+
+<script>
+function register(){alert("Registration flow ready. ₹499 payment will be connected to Razorpay in the next step.");}
+function login(){alert("Login page will be connected when the backend is added.");}
+function watchVideo(){alert("Video section ready — your 30–60 second intro video can be added here.");}
+function subscribe(){alert("Thanks! Email subscription will be connected with the backend.");}
+</script>
+</body>
+</html>'''
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print(f"Ready: {path}")
