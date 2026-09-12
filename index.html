@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rent-o-Friend | Meet. Connect. Make Memories.</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f7f7fb;
+  color:#222;
+}
+
+header{
+  background:linear-gradient(135deg,#6c2bd9,#9b4dff);
+  color:white;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+}
+
+nav button{
+  border:0;
+  background:white;
+  color:#6c2bd9;
+  padding:10px 16px;
+  border-radius:20px;
+  margin-left:6px;
+  font-weight:bold;
+}
+
+.hero{
+  min-height:620px;
+  padding:65px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  background:linear-gradient(135deg,#f2eaff,#fff);
+}
+
+.hero-text{
+  max-width:600px;
+}
+
+.badge{
+  display:inline-block;
+  background:#ffe8a3;
+  color:#795500;
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:52px;
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:#762de0;
+}
+
+.hero p{
+  font-size:19px;
+  line-height:1.6;
+  color:#555;
+  margin-bottom:25px;
+}
+
+.price{
+  font-size:34px;
+  font-weight:bold;
+  color:#6c2bd9;
+  margin-bottom:18px;
+}
+
+.main-btn{
+  border:0;
+  background:linear-gradient(135deg,#6c2bd9,#a04dff);
+  color:white;
+  padding:16px 28px;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 8px 25px #6c2bd955;
+}
+
+.main-btn:hover{
+  transform:scale(1.03);
+}
+
+.hero-card{
+  width:390px;
+  max-width:100%;
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 15px 50px #0002;
+  text-align:center;
+}
+
+.avatar{
+  font-size:105px;
+  margin-bottom:10px;
+}
+
+.hero-card h2{
+  margin-bottom:8px;
+}
+
+.hero-card p{
+  color:#666;
+}
+
+.guarantee{
+  margin-top:18px;
+  background:#e9fff0;
+  color:#08752f;
+  padding:14px;
+  border-radius:15px;
+  font-weight:bold;
+}
+
+section{
+  padding:65px 6%;
+}
+
+.section-title{
+  text-align:center;
+  font-size:35px;
+  margin-bottom:40px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.card{
+  background:white;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:0 8px 30px #00000010;
+  text-align:center;
+}
+
+.card .icon{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#666;
+  line-height:1.6;
+}
+
+.how{
+  background:#fff;
+}
+
+.steps{
+  max-width:850px;
+  margin:auto;
+}
+
+.step{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:#f8f4ff;
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:15px;
+}
+
+.number{
+  min-width:48px;
+  height:48px;
+  border-radius:50%;
+  background:#762de0;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.cta{
+  text-align:center;
+  background:linear-gradient(135deg,#6c2bd9,#a04dff);
+  color:white;
+}
+
+.cta h2{
+  font-size:38px;
+  margin-bottom:12px;
+}
+
+.cta p{
+  margin-bottom:25px;
+  font-size:18px;
+}
+
+.white-btn{
+  border:0;
+  padding:15px 28px;
+  border-radius:28px;
+  background:white;
+  color:#6c2bd9;
+  font-weight:bold;
+  font-size:17px;
+  cursor:pointer;
+}
+
+footer{
+  background:#17131f;
+  color:#bbb;
+  text-align:center;
+  padding:30px 15px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-box{
+  background:white;
+  width:430px;
+  max-width:100%;
+  border-radius:25px;
+  padding:30px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:18px;
+  top:14px;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.modal-box h2{
+  margin-bottom:20px;
+  color:#6c2bd9;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.full-btn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:14px;
+  background:#6c2bd9;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+.payment-box{
+  background:#fff8df;
+  padding:18px;
+  border-radius:15px;
+  margin:15px 0;
+  text-align:center;
+}
+
+.payment-box strong{
+  font-size:28px;
+  color:#6c2bd9;
+}
+
+.dashboard{
+  display:none;
+  padding:40px 6%;
+  background:#f7f7fb;
+}
+
+.dashboard-box{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 8px 30px #0001;
+}
+
+.request{
+  background:#f8f4ff;
+  padding:18px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+@media(max-width:800px){
+  .hero{
+    flex-direction:column;
+    text-align:center;
+    padding-top:45px;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    padding:15px 4%;
+  }
+
+  nav button{
+    padding:8px 10px;
+    font-size:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">💜 Rent-o-Friend</div>
+
+  <nav>
+    <button onclick="openRegister()">Register</button>
+    <button onclick="openLogin()">Login</button>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="hero-text">
+
+    <div class="badge">✨ Make Real Connections</div>
+
+    <h1>
+      Meet Someone.<br>
+      <span>Make Memories.</span>
+    </h1>
+
+    <p>
+      Looking for someone to hang out with, talk to, explore the city
+      or simply spend some quality time with? Rent-o-Friend helps you
+      connect with people for friendly meetups.
+    </p>
+
+    <div class="price">Registration ₹499</div>
+
+    <button class="main-btn" onclick="openRegister()">
+      Get Started →
+    </button>
+
+  </div>
+
+  <div class="hero-card">
+
+    <div class="avatar">🧑‍🤝‍🧑</div>
+
+    <h2>Find Your Perfect Friend</h2>
+
+    <p>
+      Connect • Chat • Meet • Enjoy
+    </p>
+
+    <div class="guarantee">
+      🛡️ 10-Day Meetup Money-Back Guarantee*
+    </div>
+
+  </div>
+
+</section>
+
+
+<section>
+
+  <h2 class="section-title">Why Rent-o-Friend?</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>Meet New People</h3>
+      <p>
+        Find friendly people for conversations, outings and social activities.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Send Requests</h3>
+      <p>
+        Send a meetup request and connect when the other person accepts.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>Safe & Simple</h3>
+      <p>
+        Keep your meetup experience simple, transparent and respectful.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="how">
+
+  <h2 class="section-title">How It Works</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="number">1</div>
+      <div>
+        <h3>Register</h3>
+        <p>Create your Rent-o-Friend profile.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="number">2</div>
+      <div>
+        <h3>Pay ₹499</h3>
+        <p>Complete the registration payment.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="number">3</div>
+      <div>
+        <h3>Find & Request</h3>
+        <p>Choose someone and send a meetup request.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="number">4</div>
+      <div>
+        <h3>Connect</h3>
+        <p>After acceptance, coordinate your meetup.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="cta">
+
+  <h2>Ready to Meet Someone New?</h2>
+
+  <p>Join Rent-o-Friend today.</p>
+
+  <button class="white-btn" onclick="openRegister()">
+    Register Now – ₹499
+  </button>
+
+</section>
+
+
+<div class="dashboard" id="dashboard">
+
+  <div class="dashboard-box">
+
+    <h2 id="welcome"></h2>
+
+    <p style="margin-top:10px;color:#666;">
+      Welcome to your Rent-o-Friend dashboard.
+    </p>
+
+    <hr style="margin:25px 0;border:0;border-top:1px solid #eee;">
+
+    <h3>Send a Meetup Request</h3>
+
+    <textarea
+      id="requestText"
+      placeholder="Write your meetup request..."
+    ></textarea>
+
+    <button class="full-btn" onclick="sendRequest()">
+      Send Request
+    </button>
+
+    <div id="requestList"></div>
+
+  </div>
+
+</div>
+
+
+<div class="modal" id="registerModal">
+
+  <div class="modal-box">
+
+    <div class="close" onclick="closeModal()">×</div>
+
+    <h2>Create Your Account</h2>
+
+    <input id="name" type="text" placeholder="Full Name">
+
+    <input id="email" type="email" placeholder="Email">
+
+    <input id="phone" type="tel" placeholder="Mobile Number">
+
+    <select id="city">
+      <option value="">Select City</option>
+      <option>Mumbai</option>
+      <option>Delhi</option>
+      <option>Bangalore</option>
+      <option>Hyderabad</option>
+      <option>Pune</option>
+      <option>Chennai</option>
+      <option>Kolkata</option>
+      <option>Other</option>
+    </select>
+
+    <div class="payment-box">
+
+      <div>Registration Fee</div>
+
+      <strong>₹499</strong>
+
+      <p style="margin-top:6px;">
+        Secure payment
+      </p>
+
+    </div>
+
+    <button class="full-btn" onclick="continuePayment()">
+      Continue to Payment ₹499
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <div class="close" onclick="closeModal()">×</div>
+
+    <h2>Login</h2>
+
+    <input id="loginEmail" type="email" placeholder="Email">
+
+    <button class="full-btn" onclick="loginUser()">
+      Login
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  <p>© 2026 Rent-o-Friend. All rights reserved.</p>
+
+  <p style="margin-top:8px;font-size:13px;">
+    *Money-back terms and eligibility should be clearly defined before launch.
+  </p>
+
+</footer>
+
+
+<script>
+
+const PAYMENT_LINK = "https://rzp.io/rzp/u7he3XBj";
+
+function openRegister(){
+
+  document.getElementById("registerModal").style.display="flex";
+
+}
+
+function openLogin(){
+
+  document.getElementById("loginModal").style.display="flex";
+
+}
+
+function closeModal(){
+
+  document.getElementById("registerModal").style.display="none";
+
+  document.getElementById("loginModal").style.display="none";
+
+}
+
+function continuePayment(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const city =
+    document.getElementById("city").value;
+
+  if(!name || !email || !phone || !city){
+
+    alert("Please fill all details.");
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "rentFriendName",
+    name
+  );
+
+  localStorage.setItem(
+    "rentFriendEmail",
+    email
+  );
+
+  localStorage.setItem(
+    "rentFriendPhone",
+    phone
+  );
+
+  localStorage.setItem(
+    "rentFriendCity",
+    city
+  );
+
+  window.location.href = PAYMENT_LINK;
+
+}
+
+function loginUser(){
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  if(!email){
+
+    alert("Please enter your email.");
+
+    return;
+
+  }
+
+  const savedEmail =
+    localStorage.getItem("rentFriendEmail");
+
+  const savedName =
+    localStorage.getItem("rentFriendName");
+
+  if(savedEmail && email === savedEmail){
+
+    closeModal();
+
+    showDashboard(
+      savedName || "Friend"
+    );
+
+  }else{
+
+    alert(
+      "Account not found on this device. Please register first."
+    );
+
+  }
+
+}
+
+function showDashboard(name){
+
+  document.getElementById("dashboard").style.display="block";
+
+  document.getElementById("welcome").innerText =
+    "Welcome, " + name + " 👋";
+
+  document.getElementById("dashboard")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+function sendRequest(){
+
+  const text =
+    document.getElementById("requestText").value.trim();
+
+  if(!text){
+
+    alert("Please write a request.");
+
+    return;
+
+  }
+
+  const requestBox =
+    document.createElement("div");
+
+  requestBox.className="request";
+
+  requestBox.innerHTML =
+    "<strong>Meetup Request</strong><br><br>" +
+    text +
+    "<br><br><small>Status: Sent ⏳</small>";
+
+  document
+    .getElementById("requestList")
+    .prepend(requestBox);
+
+  document.getElementById("requestText").value="";
+
+}
+
+window.onclick=function(event){
+
+  if(event.target.classList.contains("modal")){
+
+    closeModal();
+
+  }
+
+};
+
+</script>
+
+</body>
+  </html>
