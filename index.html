@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rent O Friend</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f5f7fb;
+ color:#222;
+}
+header{
+ background:#fff;
+ padding:16px 22px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ box-shadow:0 2px 10px #0001;
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+.logo{
+ font-size:24px;
+ font-weight:800;
+ color:#ff4b6e;
+}
+nav button{
+ border:0;
+ background:none;
+ font-size:15px;
+ margin-left:12px;
+ cursor:pointer;
+}
+.hero{
+ min-height:520px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:40px 20px;
+ background:linear-gradient(135deg,#fff0f4,#eef5ff);
+}
+.hero h1{
+ font-size:48px;
+ margin:0 0 15px;
+}
+.hero p{
+ font-size:19px;
+ color:#666;
+ max-width:600px;
+ margin:auto;
+ line-height:1.6;
+}
+.btn{
+ border:0;
+ padding:13px 22px;
+ border-radius:9px;
+ cursor:pointer;
+ font-weight:bold;
+ font-size:15px;
+}
+.primary{background:#ff4b6e;color:white}
+.secondary{background:#eee;color:#222}
+.hero .btn{margin:25px 6px 0}
+section{
+ padding:50px 20px;
+ max-width:1100px;
+ margin:auto;
+}
+.cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:20px;
+}
+.card{
+ background:white;
+ padding:25px;
+ border-radius:16px;
+ box-shadow:0 4px 20px #00000010;
+}
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ align-items:center;
+ justify-content:center;
+ z-index:100;
+ padding:20px;
+}
+.box{
+ background:white;
+ width:100%;
+ max-width:420px;
+ padding:28px;
+ border-radius:18px;
+ position:relative;
+}
+.close{
+ position:absolute;
+ right:18px;
+ top:12px;
+ font-size:25px;
+ cursor:pointer;
+}
+input,select{
+ width:100%;
+ padding:13px;
+ margin:8px 0;
+ border:1px solid #ddd;
+ border-radius:8px;
+ outline:none;
+}
+input:focus,select:focus{
+ border-color:#ff4b6e;
+}
+.hidden{display:none}
+.profile{
+ max-width:600px;
+ margin:40px auto;
+ background:#fff;
+ padding:30px;
+ border-radius:18px;
+ box-shadow:0 5px 25px #0001;
+}
+.status{
+ padding:12px;
+ border-radius:8px;
+ margin:12px 0;
+ background:#fff5d6;
+}
+footer{
+ text-align:center;
+ padding:30px;
+ background:#222;
+ color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Rent O Friend</div>
+
+  <nav>
+    <button onclick="goHome()">Home</button>
+    <button onclick="openLogin()">Login</button>
+    <button class="btn primary" onclick="openRegister()">Register</button>
+  </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+ <div>
+   <h1>Rent O Friend</h1>
+   <p>
+     Connect with people, make friends and enjoy amazing experiences.
+     Register today and create your profile.
+   </p>
+
+   <button class="btn primary" onclick="openRegister()">
+     Get Started
+   </button>
+
+   <button class="btn secondary" onclick="openLogin()">
+     Login
+   </button>
+ </div>
+</section>
+
+<section>
+ <h2>How It Works</h2>
+
+ <div class="cards">
+   <div class="card">
+     <h3>1. Register</h3>
+     <p>Create your account with your name, mobile number and password.</p>
+   </div>
+
+   <div class="card">
+     <h3>2. Payment</h3>
+     <p>Continue to the Razorpay payment page.</p>
+   </div>
+
+   <div class="card">
+     <h3>3. Login</h3>
+     <p>After your account is activated, login and access your profile.</p>
+   </div>
+ </div>
+</section>
+
+</main>
+
+
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+ <div class="box">
+
+  <span class="close" onclick="closeAll()">×</span>
+
+  <h2>Create Account</h2>
+
+  <input id="regName" placeholder="Full Name">
+
+  <input id="regMobile"
+         type="tel"
+         maxlength="10"
+         placeholder="Mobile Number">
+
+  <input id="regPassword"
+         type="password"
+         placeholder="Password">
+
+  <input id="regPassword2"
+         type="password"
+         placeholder="Confirm Password">
+
+  <button class="btn primary"
+          style="width:100%;margin-top:10px"
+          onclick="registerUser()">
+    Continue
+  </button>
+
+  <p id="registerMsg"></p>
+
+ </div>
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div class="modal" id="paymentModal">
+ <div class="box">
+
+  <span class="close" onclick="closeAll()">×</span>
+
+  <h2>Complete Payment</h2>
+
+  <p>
+   Your registration is ready.
+   Continue to Razorpay to complete your payment.
+  </p>
+
+  <div class="status">
+   Amount/payment will be handled on the Razorpay page.
+  </div>
+
+  <button class="btn primary"
+          style="width:100%"
+          onclick="openRazorpay()">
+    Pay with Razorpay
+  </button>
+
+  <button class="btn secondary"
+          style="width:100%;margin-top:10px"
+          onclick="closeAll()">
+    Cancel
+  </button>
+
+  <p style="font-size:12px;color:#777;margin-top:15px">
+   After successful payment, use Login.
+   Secure payment verification requires a backend.
+  </p>
+
+ </div>
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+ <div class="box">
+
+  <span class="close" onclick="closeAll()">×</span>
+
+  <h2>Login</h2>
+
+  <input id="loginMobile"
+         type="tel"
+         maxlength="10"
+         placeholder="Mobile Number">
+
+  <input id="loginPassword"
+         type="password"
+         placeholder="Password">
+
+  <button class="btn primary"
+          style="width:100%;margin-top:10px"
+          onclick="loginUser()">
+    Login
+  </button>
+
+  <p id="loginMsg"></p>
+
+ </div>
+</div>
+
+
+<!-- PROFILE -->
+
+<div id="profilePage" class="hidden">
+
+ <div class="profile">
+
+   <h2>Welcome, <span id="profileName"></span> 👋</h2>
+
+   <p><b>Mobile:</b> <span id="profileMobile"></span></p>
+
+   <div class="status">
+      Account registered successfully.
+   </div>
+
+   <button class="btn primary"
+           onclick="logout()">
+      Logout
+   </button>
+
+ </div>
+
+</div>
+
+
+<footer>
+ Rent O Friend © 2026
+</footer>
+
+
+<script>
+
+/* YOUR RAZORPAY PAYMENT LINK */
+const PAYMENT_LINK = "https://rzp.io/rzp/u7he3XBj";
+
+
+function $(id){
+ return document.getElementById(id);
+}
+
+
+/* MODALS */
+
+function openRegister(){
+ closeAll();
+ $("registerModal").style.display="flex";
+}
+
+function openLogin(){
+ closeAll();
+ $("loginModal").style.display="flex";
+}
+
+function closeAll(){
+ document.querySelectorAll(".modal").forEach(function(m){
+   m.style.display="none";
+ });
+}
+
+
+/* REGISTER */
+
+function registerUser(){
+
+ const name=$("regName").value.trim();
+ const mobile=$("regMobile").value.trim();
+ const password=$("regPassword").value;
+ const password2=$("regPassword2").value;
+
+ if(!name || !mobile || !password || !password2){
+   $("registerMsg").innerHTML=
+   "<span style='color:red'>Please fill all fields.</span>";
+   return;
+ }
+
+ if(!/^[0-9]{10}$/.test(mobile)){
+   $("registerMsg").innerHTML=
+   "<span style='color:red'>Enter a valid 10 digit mobile number.</span>";
+   return;
+ }
+
+ if(password.length < 6){
+   $("registerMsg").innerHTML=
+   "<span style='color:red'>Password must be at least 6 characters.</span>";
+   return;
+ }
+
+ if(password !== password2){
+   $("registerMsg").innerHTML=
+   "<span style='color:red'>Passwords do not match.</span>";
+   return;
+ }
+
+
+ /* SAVE ACCOUNT LOCALLY */
+
+ const user={
+   name:name,
+   mobile:mobile,
+   password:password,
+   registered:true
+ };
+
+ localStorage.setItem("rentUser",JSON.stringify(user));
+
+ $("registerMsg").innerHTML=
+ "<span style='color:green'>Registration successful.</span>";
+
+
+ setTimeout(function(){
+
+   closeAll();
+   $("paymentModal").style.display="flex";
+
+ },500);
+
+}
+
+
+/* RAZORPAY PAYMENT LINK */
+
+function openRazorpay(){
+
+ window.location.href=PAYMENT_LINK;
+
+}
+
+
+/* LOGIN */
+
+function loginUser(){
+
+ const mobile=$("loginMobile").value.trim();
+ const password=$("loginPassword").value;
+
+ const saved=localStorage.getItem("rentUser");
+
+ if(!saved){
+
+   $("loginMsg").innerHTML=
+   "<span style='color:red'>Please register first.</span>";
+
+   return;
+ }
+
+ const user=JSON.parse(saved);
+
+ if(user.mobile !== mobile ||
+    user.password !== password){
+
+   $("loginMsg").innerHTML=
+   "<span style='color:red'>Invalid mobile number or password.</span>";
+
+   return;
+ }
+
+
+ /* LOGIN SUCCESS */
+
+ localStorage.setItem("loggedIn","true");
+
+ closeAll();
+
+ $("home").style.display="none";
+
+ $("profilePage").classList.remove("hidden");
+
+ $("profileName").innerText=user.name;
+ $("profileMobile").innerText=user.mobile;
+
+ window.scrollTo(0,0);
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+ localStorage.removeItem("loggedIn");
+
+ $("profilePage").classList.add("hidden");
+
+ $("home").style.display="block";
+
+ openLogin();
+
+}
+
+
+/* HOME */
+
+function goHome(){
+
+ $("profilePage").classList.add("hidden");
+
+ $("home").style.display="block";
+
+ window.scrollTo({
+   top:0,
+   behavior:"smooth"
+ });
+
+}
+
+
+/* KEEP LOGIN AFTER REFRESH */
+
+window.onload=function(){
+
+ const loggedIn=localStorage.getItem("loggedIn");
+ const saved=localStorage.getItem("rentUser");
+
+ if(loggedIn==="true" && saved){
+
+   const user=JSON.parse(saved);
+
+   $("home").style.display="none";
+
+   $("profilePage").classList.remove("hidden");
+
+   $("profileName").innerText=user.name;
+   $("profileMobile").innerText=user.mobile;
+
+ }
+
+};
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+window.onclick=function(e){
+
+ document.querySelectorAll(".modal").forEach(function(modal){
+
+   if(e.target===modal){
+     modal.style.display="none";
+   }
+
+ });
+
+};
+
+</script>
+
+</body>
+</html>
