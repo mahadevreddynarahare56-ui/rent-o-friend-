@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent-O-Friend</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f6f7fb;
+  color:#222;
+}
+header{
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:white;
+  padding:16px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo{font-size:25px;font-weight:800}
+nav button{
+  border:0;
+  padding:10px 15px;
+  margin-left:6px;
+  border-radius:20px;
+  background:white;
+  color:#ff416c;
+  font-weight:bold;
+  cursor:pointer;
+}
+.hero{
+  min-height:570px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:50px 20px;
+  background:
+  linear-gradient(135deg,rgba(255,65,108,.9),rgba(255,75,43,.9));
+  color:white;
+}
+.hero h1{font-size:48px;margin-bottom:15px}
+.hero p{font-size:19px;max-width:650px;margin:auto;line-height:1.6}
+.price{
+  font-size:42px;
+  font-weight:bold;
+  margin:25px 0 8px;
+}
+.hero small{font-size:16px}
+.main-btn{
+  display:inline-block;
+  margin-top:25px;
+  background:white;
+  color:#ff416c;
+  border:0;
+  padding:15px 30px;
+  border-radius:30px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+section{padding:55px 7%}
+.title{text-align:center;font-size:32px;margin-bottom:30px}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card{
+  background:white;
+  padding:28px 20px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  text-align:center;
+}
+.card .icon{font-size:42px;margin-bottom:15px}
+.card h3{margin-bottom:10px}
+.guarantee{
+  background:#fff1f4;
+  text-align:center;
+}
+.guarantee h2{color:#e62954;font-size:32px;margin-bottom:12px}
+.guarantee p{max-width:700px;margin:auto;line-height:1.7}
+.profiles{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+.profile{
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+.avatar{
+  width:75px;height:75px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:auto auto 12px;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:white;font-size:30px;
+}
+.profile{text-align:center}
+.profile button{
+  margin-top:14px;
+  border:0;
+  background:#ff416c;
+  color:white;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+footer{
+  background:#171717;
+  color:#aaa;
+  text-align:center;
+  padding:30px;
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  align-items:center;
+  justify-content:center;
+  z-index:500;
+  padding:20px;
+}
+.modal-box{
+  width:100%;
+  max-width:430px;
+  background:white;
+  padding:28px;
+  border-radius:20px;
+  position:relative;
+}
+.modal-box h2{text-align:center;margin-bottom:20px}
+.close{
+  position:absolute;
+  right:18px;
+  top:12px;
+  font-size:25px;
+  cursor:pointer;
+}
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+}
+.form-btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  background:#ff416c;
+  color:white;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+.dashboard{
+  display:none;
+  padding:35px 7%;
+  background:#f6f7fb;
+}
+.dashbox{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+.chat{
+  height:220px;
+  overflow:auto;
+  background:#f5f5f5;
+  border-radius:12px;
+  padding:12px;
+}
+.msg{
+  background:white;
+  padding:9px 12px;
+  border-radius:12px;
+  margin:6px 0;
+  max-width:80%;
+}
+.msg.me{
+  background:#ff416c;
+  color:white;
+  margin-left:auto;
+}
+.payment{
+  background:linear-gradient(135deg,#fff,#fff0f3);
+  border:2px solid #ff416c;
+}
+.logout{
+  background:#333!important;
+  color:white!important;
+}
+@media(max-width:600px){
+ .hero h1{font-size:36px}
+ nav button{padding:8px 10px;font-size:12px}
+ section{padding:40px 5%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">❤️ Rent-O-Friend</div>
+  <nav>
+    <button onclick="openModal('loginModal')">Login</button>
+    <button onclick="openModal('registerModal')">Register</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Rent a Friend. Make a Connection.</h1>
+    <p>
+      Meet new people, find a friendly companion and enjoy meaningful
+      conversations and meetups.
+    </p>
+
+    <div class="price">₹499</div>
+    <small>One-time registration fee</small><br>
+
+    <button class="main-btn" onclick="openModal('registerModal')">
+      🚀 Join Rent-O-Friend
+    </button>
+  </div>
+</section>
+
+<section>
+  <h2 class="title">How It Works</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">👤</div>
+      <h3>Create Profile</h3>
+      <p>Register and create your friendly profile.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔎</div>
+      <h3>Find a Friend</h3>
+      <p>Browse available people and find someone compatible.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Send Request</h3>
+      <p>Send a connection request and start chatting.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>Meet</h3>
+      <p>After accepting the request, connect and plan a meetup.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee">
+  <h2>🛡️ 10-Day Money Back Guarantee</h2>
+  <p>
+    If you don't get a meetup opportunity within 10 days,
+    you can request a refund according to our refund policy.
+  </p>
+</section>
+
+<section>
+  <h2 class="title">Find Your Friend</h2>
+
+  <div class="profiles">
+
+    <div class="profile">
+      <div class="avatar">👨</div>
+      <h3>Rahul, 25</h3>
+      <p>📍 Mumbai</p>
+      <p>Friendly • Movies • Travel</p>
+      <button onclick="sendRequest('Rahul')">Send Request</button>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">👩</div>
+      <h3>Priya, 24</h3>
+      <p>📍 Mumbai</p>
+      <p>Music • Coffee • Conversation</p>
+      <button onclick="sendRequest('Priya')">Send Request</button>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">👨</div>
+      <h3>Arjun, 27</h3>
+      <p>📍 Pune</p>
+      <p>Fitness • Travel • Food</p>
+      <button onclick="sendRequest('Arjun')">Send Request</button>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="card payment">
+    <h2>Join Rent-O-Friend</h2>
+    <p style="margin:15px 0">
+      Registration Fee
+    </p>
+    <div class="price" style="font-size:38px">₹499</div>
+
+    <button class="form-btn" onclick="payNow()">
+      💳 Pay ₹499 & Register
+    </button>
+
+    <p style="font-size:12px;margin-top:12px">
+      Secure payment powered by Razorpay
+    </p>
+  </div>
+</section>
+
+<div class="dashboard" id="dashboard">
+
+  <h2 class="title">My Dashboard</h2>
+
+  <div class="dashbox">
+    <h3>👤 My Profile</h3>
+    <p id="profileText" style="margin-top:10px"></p>
+    <button class="form-btn" onclick="openModal('profileModal')">
+      Edit Profile
+    </button>
+  </div>
+
+  <div class="dashbox">
+    <h3>📩 Requests</h3>
+    <p id="requestText" style="margin-top:10px">
+      No requests yet.
+    </p>
+  </div>
+
+  <div class="dashbox">
+    <h3>💬 Chat</h3>
+
+    <div class="chat" id="chatBox">
+      <div class="msg">
+        Welcome to Rent-O-Friend!
+      </div>
+    </div>
+
+    <input id="chatInput" placeholder="Type your message...">
+    <button class="form-btn" onclick="sendMessage()">Send Message</button>
+  </div>
+
+  <button class="form-btn logout" onclick="logout()">Logout</button>
+
+</div>
+
+<footer>
+  <p>© 2026 Rent-O-Friend</p>
+  <p style="margin-top:8px">
+    Connect • Chat • Meet
+  </p>
+</footer>
+
+
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('registerModal')">×</span>
+
+    <h2>❤️ Create Account</h2>
+
+    <input id="regName" placeholder="Full Name">
+    <input id="regEmail" type="email" placeholder="Email">
+    <input id="regPhone" placeholder="Mobile Number">
+    <input id="regPassword" type="password" placeholder="Password">
+
+    <button class="form-btn" onclick="register()">
+      Create Account
+    </button>
+
+    <p style="text-align:center;margin-top:15px">
+      Already registered?
+      <b onclick="switchLogin()" style="color:#ff416c;cursor:pointer">
+        Login
+      </b>
+    </p>
+
+  </div>
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('loginModal')">×</span>
+
+    <h2>🔐 Login</h2>
+
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button class="form-btn" onclick="login()">
+      Login
+    </button>
+
+    <p style="text-align:center;margin-top:15px">
+      New user?
+      <b onclick="switchRegister()" style="color:#ff416c;cursor:pointer">
+        Register
+      </b>
+    </p>
+
+  </div>
+</div>
+
+
+<!-- PROFILE MODAL -->
+
+<div class="modal" id="profileModal">
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('profileModal')">×</span>
+
+    <h2>👤 Edit Profile</h2>
+
+    <input id="editAge" placeholder="Age">
+    <input id="editCity" placeholder="City">
+    <input id="editInterest" placeholder="Interests">
+
+    <button class="form-btn" onclick="saveProfile()">
+      Save Profile
+    </button>
+
+  </div>
+</div>
+
+
+<script>
+
+/* PUT YOUR RAZORPAY PAYMENT LINK HERE */
+
+const RAZORPAY_LINK = "https://rzp.io/rzp/u7he3XBj";
+
+
+function openModal(id){
+  document.getElementById(id).style.display="flex";
+}
+
+function closeModal(id){
+  document.getElementById(id).style.display="none";
+}
+
+function switchLogin(){
+  closeModal("registerModal");
+  openModal("loginModal");
+}
+
+function switchRegister(){
+  closeModal("loginModal");
+  openModal("registerModal");
+}
+
+
+/* REGISTER */
+
+function register(){
+
+  const name=document.getElementById("regName").value.trim();
+  const email=document.getElementById("regEmail").value.trim();
+  const phone=document.getElementById("regPhone").value.trim();
+  const password=document.getElementById("regPassword").value;
+
+  if(!name || !email || !phone || !password){
+    alert("Please fill all details.");
+    return;
+  }
+
+  const user={
+    name:name,
+    email:email,
+    phone:phone,
+    password:password,
+    age:"",
+    city:"",
+    interest:""
+  };
+
+  localStorage.setItem("rentFriendUser",JSON.stringify(user));
+
+  alert("Account created successfully!");
+
+  closeModal("registerModal");
+
+  showDashboard();
+}
+
+
+/* LOGIN */
+
+function login(){
+
+  const email=document.getElementById("loginEmail").value.trim();
+  const password=document.getElementById("loginPassword").value;
+
+  const saved=localStorage.getItem("rentFriendUser");
+
+  if(!saved){
+    alert("Account not found. Please register first.");
+    return;
+  }
+
+  const user=JSON.parse(saved);
+
+  if(email===user.email && password===user.password){
+
+    closeModal("loginModal");
+    showDashboard();
+
+  }else{
+
+    alert("Incorrect email or password.");
+
+  }
+}
+
+
+/* DASHBOARD */
+
+function showDashboard(){
+
+  const saved=localStorage.getItem("rentFriendUser");
+
+  if(!saved){
+    return;
+  }
+
+  const user=JSON.parse(saved);
+
+  document.getElementById("dashboard").style.display="block";
+
+  document.getElementById("profileText").innerHTML=
+    "<b>"+escapeHTML(user.name)+"</b><br>"+
+    "📧 "+escapeHTML(user.email)+"<br>"+
+    "📱 "+escapeHTML(user.phone)+"<br>"+
+    "🎂 "+(user.age || "Not added")+"<br>"+
+    "📍 "+(user.city || "Not added")+"<br>"+
+    "❤️ "+(user.interest || "Not added");
+
+  window.scrollTo({
+    top:document.getElementById("dashboard").offsetTop,
+    behavior:"smooth"
+  });
+}
+
+
+/* EDIT PROFILE */
+
+function saveProfile(){
+
+  const saved=localStorage.getItem("rentFriendUser");
+
+  if(!saved){
+    return;
+  }
+
+  const user=JSON.parse(saved);
+
+  user.age=document.getElementById("editAge").value;
+  user.city=document.getElementById("editCity").value;
+  user.interest=document.getElementById("editInterest").value;
+
+  localStorage.setItem("rentFriendUser",JSON.stringify(user));
+
+  closeModal("profileModal");
+
+  showDashboard();
+
+  alert("Profile updated!");
+}
+
+
+/* REQUEST */
+
+function sendRequest(name){
+
+  const saved=localStorage.getItem("rentFriendUser");
+
+  if(!saved){
+    alert("Please register/login first.");
+    openModal("registerModal");
+    return;
+  }
+
+  document.getElementById("requestText").innerHTML=
+    "✅ Request sent to <b>"+name+"</b>.<br>"+
+    "Waiting for acceptance.";
+
+  alert("Friend request sent to "+name+"!");
+}
+
+
+/* CHAT */
+
+function sendMessage(){
+
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+
+  if(!text){
+    return;
+  }
+
+  const box=document.getElementById("chatBox");
+
+  const message=document.createElement("div");
+  message.className="msg me";
+  message.textContent=text;
+
+  box.appendChild(message);
+
+  input.value="";
+
+  box.scrollTop=box.scrollHeight;
+}
+
+
+/* PAYMENT */
+
+function payNow(){
+
+  if(
+    !RAZORPAY_LINK ||
+    RAZORPAY_LINK==="PASTE_YOUR_RAZORPAY_LINK_HERE"
+  ){
+
+    alert("Please add your Razorpay payment link first.");
+    return;
+  }
+
+  window.open(RAZORPAY_LINK,"_blank");
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  document.getElementById("dashboard").style.display="none";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  alert("Logged out.");
+}
+
+
+/* SECURITY FOR DISPLAY TEXT */
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+window.addEventListener("click",function(e){
+
+  document.querySelectorAll(".modal").forEach(function(modal){
+
+    if(e.target===modal){
+      modal.style.display="none";
+    }
+
+  });
+
+});
+
+
+/* SHOW EXISTING LOGIN SESSION */
+
+window.addEventListener("load",function(){
+
+  if(localStorage.getItem("rentFriendUser")){
+    // User data remains saved in this browser.
+  }
+
+});
+
+</script>
+
+</body>
+</html>
