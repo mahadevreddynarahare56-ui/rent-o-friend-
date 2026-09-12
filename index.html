@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent O Friend</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f7f7f7;
+  color:#222;
+}
+
+/* HEADER */
+header{
+  height:72px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:800;
+  color:#ff4f81;
+}
+
+.logo span{
+  color:#6c4cff;
+}
+
+nav{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+}
+
+.navBtn{
+  border:0;
+  padding:11px 20px;
+  border-radius:25px;
+  background:#6c4cff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:600px;
+  padding:70px 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  background:linear-gradient(135deg,#fff0f5,#f0edff);
+}
+
+.heroText{
+  max-width:590px;
+}
+
+.badge{
+  display:inline-block;
+  background:#fff;
+  color:#ff4f81;
+  padding:9px 17px;
+  border-radius:30px;
+  font-weight:bold;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.hero h1{
+  font-size:58px;
+  line-height:1.05;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  color:#ff4f81;
+}
+
+.hero p{
+  font-size:19px;
+  line-height:1.6;
+  color:#666;
+  margin-bottom:30px;
+}
+
+.buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  background:#ff4f81;
+  color:white;
+  border:0;
+  padding:15px 28px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(255,79,129,.25);
+}
+
+.secondary{
+  background:white;
+  color:#6c4cff;
+  border:2px solid #6c4cff;
+  padding:13px 26px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.heroCard{
+  width:410px;
+  min-height:430px;
+  border-radius:35px;
+  background:white;
+  padding:22px;
+  box-shadow:0 25px 60px rgba(80,50,120,.18);
+  position:relative;
+}
+
+.photo{
+  height:260px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#ffb6c9,#a99aff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:80px;
+}
+
+.cardInfo{
+  padding:18px 5px 0;
+}
+
+.cardInfo h3{
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.cardInfo p{
+  color:#777;
+  margin-bottom:15px;
+}
+
+.price{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.price strong{
+  color:#ff4f81;
+  font-size:21px;
+}
+
+/* SEARCH */
+.searchBox{
+  width:86%;
+  max-width:1050px;
+  margin:-35px auto 60px;
+  background:white;
+  border-radius:20px;
+  padding:22px;
+  display:flex;
+  gap:12px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  position:relative;
+  z-index:5;
+}
+
+.searchBox input,
+.searchBox select{
+  flex:1;
+  min-width:0;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  outline:none;
+}
+
+.searchBox button{
+  border:0;
+  padding:0 27px;
+  border-radius:12px;
+  background:#6c4cff;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* SECTION */
+section{
+  padding:65px 7%;
+}
+
+.sectionTitle{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.sectionTitle h2{
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+.sectionTitle p{
+  color:#777;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.feature{
+  background:#fff;
+  padding:35px 25px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.icon{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#f0edff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin:0 auto 18px;
+}
+
+.feature h3{
+  margin-bottom:10px;
+}
+
+.feature p{
+  color:#777;
+  line-height:1.6;
+}
+
+/* FRIENDS */
+.friends{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.friend{
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+.friendPhoto{
+  height:220px;
+  background:linear-gradient(135deg,#ffd1df,#c9c0ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:70px;
+}
+
+.friendInfo{
+  padding:20px;
+}
+
+.friendInfo h3{
+  margin-bottom:5px;
+}
+
+.friendInfo p{
+  color:#777;
+  margin-bottom:12px;
+}
+
+.tag{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:20px;
+  background:#f0edff;
+  color:#6c4cff;
+  font-size:13px;
+  margin-right:5px;
+}
+
+/* CTA */
+.cta{
+  margin:30px 7% 70px;
+  padding:60px 30px;
+  text-align:center;
+  border-radius:30px;
+  background:linear-gradient(135deg,#6c4cff,#ff4f81);
+  color:white;
+}
+
+.cta h2{
+  font-size:38px;
+  margin-bottom:15px;
+}
+
+.cta p{
+  margin-bottom:25px;
+}
+
+.cta button{
+  background:white;
+  color:#6c4cff;
+  border:0;
+  padding:14px 30px;
+  border-radius:30px;
+  font-weight:bold;
+}
+
+/* FOOTER */
+footer{
+  background:#171321;
+  color:#fff;
+  padding:45px 7%;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+footer p{
+  color:#aaa;
+  margin-top:10px;
+}
+
+footer a{
+  color:#ddd;
+  text-decoration:none;
+  display:block;
+  margin-bottom:9px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:20px;
+}
+
+.modalBox{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:25px;
+  padding:30px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:20px;
+  top:15px;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.modalBox h2{
+  margin-bottom:20px;
+}
+
+.modalBox input{
+  width:100%;
+  padding:14px;
+  margin-bottom:13px;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
+
+.modalBox button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#ff4f81;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+  nav a{
+    display:none;
+  }
+
+  .hero{
+    flex-direction:column;
+    text-align:center;
+    padding-top:45px;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .heroCard{
+    width:100%;
+    max-width:410px;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .searchBox{
+    flex-direction:column;
+    margin-top:-20px;
+  }
+
+  .searchBox button{
+    padding:15px;
+  }
+
+  .features,
+  .friends{
+    grid-template-columns:1fr;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Rent <span>O</span> Friend</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#how">How It Works</a>
+    <a href="#friends">Find Friends</a>
+    <button class="navBtn" onclick="openLogin()">Login</button>
+  </nav>
+</header>
+
+
+<section class="hero" id="home">
+
+  <div class="heroText">
+
+    <div class="badge">✨ Meet • Connect • Enjoy</div>
+
+    <h1>
+      Rent a Friend.<br>
+      <span>Make Memories.</span>
+    </h1>
+
+    <p>
+      Need someone to hang out with, explore a city,
+      attend an event or simply have a great conversation?
+      Find your perfect companion on Rent O Friend.
+    </p>
+
+    <div class="buttons">
+      <button class="primary" onclick="openRegister()">
+        Get Started
+      </button>
+
+      <button class="secondary" onclick="scrollToFriends()">
+        Explore Friends
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="heroCard">
+
+    <div class="photo">😊</div>
+
+    <div class="cardInfo">
+
+      <h3>Find Your Perfect Friend</h3>
+
+      <p>Friendly people • Verified profiles</p>
+
+      <div class="price">
+        <strong>From ₹499</strong>
+        <span>⭐ 4.9</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="searchBox">
+
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="What are you looking for?"
+  >
+
+  <select id="city">
+    <option value="">Select City</option>
+    <option>Mumbai</option>
+    <option>Delhi</option>
+    <option>Bangalore</option>
+    <option>Hyderabad</option>
+    <option>Pune</option>
+    <option>Chennai</option>
+  </select>
+
+  <button onclick="searchFriends()">Search</button>
+
+</div>
+
+
+<section id="how">
+
+  <div class="sectionTitle">
+    <h2>How Rent O Friend Works</h2>
+    <p>Simple, safe and made for meaningful connections.</p>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="icon">🔎</div>
+      <h3>Find</h3>
+      <p>Browse profiles and discover someone who matches your interests.</p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">💬</div>
+      <h3>Connect</h3>
+      <p>Connect with your selected friend and discuss your plans.</p>
+    </div>
+
+    <div class="feature">
+      <div class="icon">❤️</div>
+      <h3>Enjoy</h3>
+      <p>Meet, hang out and create memorable experiences together.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="friends">
+
+  <div class="sectionTitle">
+    <h2>Popular Friends</h2>
+    <p>Meet people ready to make your day better.</p>
+  </div>
+
+  <div class="friends">
+
+    <div class="friend">
+      <div class="friendPhoto">👩🏻</div>
+
+      <div class="friendInfo">
+        <h3>Priya, 24</h3>
+        <p>📍 Mumbai</p>
+        <span class="tag">Movies</span>
+        <span class="tag">Coffee</span>
+      </div>
+    </div>
+
+
+    <div class="friend">
+      <div class="friendPhoto">👨🏻</div>
+
+      <div class="friendInfo">
+        <h3>Rahul, 27</h3>
+        <p>📍 Delhi</p>
+        <span class="tag">Travel</span>
+        <span class="tag">Sports</span>
+      </div>
+    </div>
+
+
+    <div class="friend">
+      <div class="friendPhoto">👩🏻‍🦰</div>
+
+      <div class="friendInfo">
+        <h3>Neha, 25</h3>
+        <p>📍 Bangalore</p>
+        <span class="tag">Music</span>
+        <span class="tag">Food</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="cta">
+
+  <h2>Ready to Meet Someone New?</h2>
+
+  <p>
+    Create your profile and start connecting today.
+  </p>
+
+  <button onclick="openRegister()">
+    Create Your Profile
+  </button>
+
+</div>
+
+
+<footer>
+
+  <div>
+    <h2>Rent O Friend</h2>
+    <p>Connect. Meet. Make Memories.</p>
+  </div>
+
+  <div>
+    <h3>Quick Links</h3>
+    <br>
+    <a href="#home">Home</a>
+    <a href="#how">How It Works</a>
+    <a href="#friends">Find Friends</a>
+  </div>
+
+</footer>
+
+
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+
+  <div class="modalBox">
+
+    <span class="close" onclick="closeModal()">×</span>
+
+    <h2>Create Account</h2>
+
+    <input id="regName" type="text" placeholder="Full Name">
+
+    <input id="regEmail" type="email" placeholder="Email">
+
+    <input id="regPhone" type="tel" placeholder="Phone Number">
+
+    <input id="regPassword" type="password" placeholder="Password">
+
+    <button onclick="registerUser()">
+      Continue
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+  <div class="modalBox">
+
+    <span class="close" onclick="closeModal()">×</span>
+
+    <h2>Welcome Back</h2>
+
+    <input id="loginEmail" type="email" placeholder="Email">
+
+    <input id="loginPassword" type="password" placeholder="Password">
+
+    <button onclick="loginUser()">
+      Login
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* MODALS */
+
+function openRegister(){
+  document.getElementById("registerModal").style.display="flex";
+}
+
+function openLogin(){
+  document.getElementById("loginModal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("registerModal").style.display="none";
+  document.getElementById("loginModal").style.display="none";
+}
+
+window.onclick=function(e){
+
+  if(e.target.classList.contains("modal")){
+    closeModal();
+  }
+
+}
+
+
+/* REGISTER */
+
+function registerUser(){
+
+  const name=document.getElementById("regName").value;
+  const email=document.getElementById("regEmail").value;
+  const phone=document.getElementById("regPhone").value;
+  const password=document.getElementById("regPassword").value;
+
+  if(!name || !email || !phone || !password){
+    alert("Please fill all details.");
+    return;
+  }
+
+  localStorage.setItem(
+    "rentFriendUser",
+    JSON.stringify({
+      name:name,
+      email:email,
+      phone:phone
+    })
+  );
+
+  alert(
+    "Registration successful! Welcome "+name
+  );
+
+  closeModal();
+}
+
+
+/* LOGIN */
+
+function loginUser(){
+
+  const email=document.getElementById("loginEmail").value;
+
+  if(!email){
+    alert("Please enter your email.");
+    return;
+  }
+
+  const user=localStorage.getItem("rentFriendUser");
+
+  if(user){
+
+    const data=JSON.parse(user);
+
+    if(data.email===email){
+
+      alert("Login successful! Welcome "+data.name);
+      closeModal();
+      return;
+
+    }
+
+  }
+
+  alert(
+    "Account not found. Please register first."
+  );
+
+}
+
+
+/* SEARCH */
+
+function searchFriends(){
+
+  const search=
+    document.getElementById("searchInput").value;
+
+  const city=
+    document.getElementById("city").value;
+
+  let message="Searching for friends";
+
+  if(search){
+    message+=" interested in "+search;
+  }
+
+  if(city){
+    message+=" in "+city;
+  }
+
+  message+="...";
+
+  alert(message);
+
+  document.getElementById("friends")
+    .scrollIntoView({behavior:"smooth"});
+
+}
+
+
+/* SCROLL */
+
+function scrollToFriends(){
+
+  document.getElementById("friends")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+  </html>
